@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:text="@string/str_seconds_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek_bar_seconds"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/text_view_seconds_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:text="@string/str_minute_offset"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek_bar_minute"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/text_view_minute_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:text="@string/str_hours_offset"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek_bar_hour"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/text_view_hours_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

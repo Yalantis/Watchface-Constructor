@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Independent WatchFace</string>
+    <string name="select_file">Select a File to Upload</string>
+    <string name="str_change_background">Change background</string>
+    <string name="str_change_hours">Change hour tick</string>
+    <string name="str_change_minute">Change minute tick</string>
+    <string name="str_change_second">Change second tick</string>
+    <string name="str_save_config">Save configuration</string>
+    <string name="str_ticks_confihuration">Ticks congiguration</string>
+    <string name="str_ambient_bg">Change ambient background</string>
+    <string name="str_ambient">Ambient</string>
+    <string name="str_minute_ambient">Change ambient minute</string>
+    <string name="str_ambient_hour">Change ambient hour</string>
+    <string name="str_seconds_offset">Seconds offset</string>
+    <string name="str_minute_offset">Minute offset</string>
+    <string name="str_hours_offset">Hours offset</string>
+</resources>
