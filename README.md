@@ -13,3 +13,6 @@ How it works?
 2. Build and install weareble app
 3. Build and install mobile app
 4. Now you can customize watchface from mobile
+
+Please check our article 
+https://yalantis.com/blog/building-a-customizable-constructor-for-designers-of-android-wear-watch-face-apps/
