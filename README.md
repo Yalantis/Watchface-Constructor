@@ -1,3 +1,5 @@
+[![Yalantis](https://github.com/Yalantis/Watchface-Constructor/blob/master/badge.png)](https://yalantis.com/?utm_source=github)
+
 # Watchface-Constructor
 
 This is simple watchface constructor demo. It offers customization of the following features:
