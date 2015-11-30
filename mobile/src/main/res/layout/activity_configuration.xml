@@ -1,52 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/linear_layout_root"
-              android:orientation="vertical"
+<LinearLayout android:id="@+id/linear_layout_root"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/configuration_background"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <Button
         android:id="@+id/button_change_background"
-        android:text="@string/str_change_background"
-        android:layout_marginTop="10dp"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_change_background"/>
 
     <Button
         android:id="@+id/button_ambient"
-        android:text="@string/str_ambient"
-        android:layout_marginTop="10dp"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_ambient"/>
 
     <Button
         android:id="@+id/button_change_hours_ticks"
-        android:text="@string/str_change_hours"
-        android:layout_marginTop="10dp"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_change_hours"/>
 
 
     <Button
         android:id="@+id/button_change_minute_ticks"
-        android:text="@string/str_change_minute"
-        android:layout_marginTop="10dp"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_change_minute"/>
 
     <Button
         android:id="@+id/button_change_second_tick"
-        android:layout_marginTop="10dp"
-        android:text="@string/str_change_second"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_change_second"/>
 
     <Button
         android:id="@+id/button_ticks_configuration"
-        android:layout_marginTop="10dp"
-        android:text="@string/str_ticks_confihuration"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"
+        android:text="@string/str_ticks_confihuration"/>
 
     <Button
         android:id="@+id/button_change_save_configuration"
-        android:layout_marginTop="10dp"
+        style="@style/Button.BaseWidth"
+        android:layout_marginLeft="@dimen/margin_buttons"
+        android:layout_marginRight="@dimen/margin_buttons"
+        android:layout_marginTop="@dimen/margin_save_top"
+        android:background="@drawable/selector_button_save"
         android:text="@string/str_save_config"
-        style="@style/Button.BaseWidth"/>
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/buttons_text_size"/>
 
 
 </LinearLayout>

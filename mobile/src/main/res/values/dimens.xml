@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_buttons">20dp</dimen>
+    <dimen name="margin_top_buttons">10dp</dimen>
+    <dimen name="margin_save_top">50dp</dimen>
+    <dimen name="buttons_text_size">18sp</dimen>
+</resources>

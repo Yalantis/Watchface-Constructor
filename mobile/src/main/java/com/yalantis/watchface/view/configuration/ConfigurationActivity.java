@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 
 import com.yalantis.watchface.Constants;
 import com.yalantis.watchface.R;
@@ -12,6 +14,7 @@ import com.yalantis.watchface.presenter.configuration.ConfigurationPresenterImpl
 import com.yalantis.watchface.view.BaseGoogleApiActivity;
 import com.yalantis.watchface.view.ticks_options.TickSetupActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -22,11 +25,18 @@ public class ConfigurationActivity extends BaseGoogleApiActivity implements Conf
 
     protected ConfigurationPresenter mConfigurationPresenter = new ConfigurationPresenterImpl();
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.linear_layout_root)
+    LinearLayout linearLayoutRoot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        setTitle(getString(R.string.main_label));
         mConfigurationPresenter.register(this);
     }
 
@@ -59,6 +69,8 @@ public class ConfigurationActivity extends BaseGoogleApiActivity implements Conf
     @OnClick(R.id.button_change_save_configuration)
     void onClickSaveConfig() {
         mConfigurationPresenter.saveConfig();
+        Snackbar.make(linearLayoutRoot, getString(R.string.saved_message), Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @OnClick(R.id.button_ticks_configuration)

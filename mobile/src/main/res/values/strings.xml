@@ -14,4 +14,6 @@
     <string name="str_seconds_offset">Seconds offset</string>
     <string name="str_minute_offset">Minute offset</string>
     <string name="str_hours_offset">Hours offset</string>
+    <string name="main_label">Configuration watchface</string>
+    <string name="saved_message">Configuration has been saved</string>
 </resources>

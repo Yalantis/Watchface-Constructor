@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
+              android:background="@color/configuration_background"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <Button
         android:id="@+id/button_change_background"
         android:text="@string/str_ambient_bg"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"/>
 
     <Button
         android:id="@+id/button_change_ambient_hour"
         android:text="@string/str_ambient_hour"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"/>
 
     <Button
         android:id="@+id/button_change_ambient_minute"
         android:text="@string/str_minute_ambient"
-        style="@style/Button.BaseWidth"/>
+        style="@style/Button.Option"/>
 
 </LinearLayout>
