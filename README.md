@@ -9,6 +9,8 @@
 3. Placement of watch hands   
 4. Ambient mode 
 
+<img src="https://github.com/Yalantis/Watchface-Constructor/blob/master/app_watch_dribbble.gif" alt="alt text" style="width:200;height:200">
+
 #### How it works?
 
 1. Pull this repository
