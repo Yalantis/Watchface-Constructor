@@ -3,6 +3,7 @@ package com.yalantis.watchface.view.configuration;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.yalantis.watchface.Constants;
 import com.yalantis.watchface.R;
@@ -10,6 +11,7 @@ import com.yalantis.watchface.presenter.configuration.ConfigurationPresenter;
 import com.yalantis.watchface.presenter.configuration.ConfigurationPresenterImpl;
 import com.yalantis.watchface.view.BaseGoogleApiActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -17,6 +19,9 @@ import butterknife.OnClick;
  * @author andrewkhristyan on 10/27/15.
  */
 public class ConfigurationAmbientActivity extends BaseGoogleApiActivity implements ConfigurationMvpView{
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     private ConfigurationPresenter mConfigurationPresenter = new ConfigurationPresenterImpl();
 
@@ -30,6 +35,8 @@ public class ConfigurationAmbientActivity extends BaseGoogleApiActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ambient);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        setTitle(getString(R.string.main_label));
         mConfigurationPresenter.register(this);
     }
 

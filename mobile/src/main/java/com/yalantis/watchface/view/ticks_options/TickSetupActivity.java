@@ -3,6 +3,7 @@ package com.yalantis.watchface.view.ticks_options;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -19,6 +20,11 @@ import butterknife.ButterKnife;
  */
 public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarUpdateMvpView {
 
+    private static final String SECONDS_KEY = "seconds_offset";
+    private static final String MINUTES_KEY = "minutes_offset";
+    private static final String HOURS_KEY = "hours_offset";
+
+
     private SeekbarPresenterImpl mSeekBarPresenter = new SeekbarPresenterImpl();
 
     @Bind(R.id.seek_bar_seconds)
@@ -33,6 +39,8 @@ public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarU
     SeekBar mSeekBarHours;
     @Bind(R.id.text_view_hours_offset)
     TextView mTextViewHoursOffset;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     public static Intent newActivity(Context context) {
         Intent intent = new Intent(context, TickSetupActivity.class);
@@ -45,19 +53,24 @@ public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarU
         setContentView(R.layout.activity_ticks_config);
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+        setTitle(getString(R.string.main_label));
+
         mTextViewSecondsOffset.setText(String.valueOf(mSeekBarSeconds.getProgress()));
+        mTextViewMinutesOffset.setText(String.valueOf(mSeekBarMinutes.getProgress()));
+        mTextViewHoursOffset.setText(String.valueOf(mSeekBarHours.getProgress()));
         mSeekBarPresenter.register(this);
 
-        mSeekBarSeconds.setOnSeekBarChangeListener(new SeekBarListener("seconds_offset"));
-        mSeekBarHours.setOnSeekBarChangeListener(new SeekBarListener("hours_offset"));
-        mSeekBarMinutes.setOnSeekBarChangeListener(new SeekBarListener("minutes_offset"));
+        mSeekBarSeconds.setOnSeekBarChangeListener(new SeekBarListener(SECONDS_KEY));
+        mSeekBarHours.setOnSeekBarChangeListener(new SeekBarListener(HOURS_KEY));
+        mSeekBarMinutes.setOnSeekBarChangeListener(new SeekBarListener(MINUTES_KEY));
         bindData();
     }
 
     private void bindData() {
-        mSeekBarSeconds.setProgress(App.getConfigurationManager().getConfigItem("seconds_offset"));
-        mSeekBarHours.setProgress(App.getConfigurationManager().getConfigItem("hours_offset"));
-        mSeekBarMinutes.setProgress(App.getConfigurationManager().getConfigItem("minutes_offset"));
+        mSeekBarSeconds.setProgress(App.getConfigurationManager().getConfigItem(SECONDS_KEY));
+        mSeekBarHours.setProgress(App.getConfigurationManager().getConfigItem(HOURS_KEY));
+        mSeekBarMinutes.setProgress(App.getConfigurationManager().getConfigItem(MINUTES_KEY));
     }
 
     @Override
