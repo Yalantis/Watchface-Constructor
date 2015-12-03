@@ -1,4 +1,5 @@
 [![Yalantis](https://github.com/Yalantis/Watchface-Constructor/blob/master/badge.png)](https://yalantis.com/?utm_source=github)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Watchface--Constructor-green.svg?style=true)](https://android-arsenal.com/details/1/2866)
 
 # Watchface-Constructor
 Please check [our article] 
