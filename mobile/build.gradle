@@ -9,12 +9,12 @@ android {
             storePassword 'android123'
         }
     }
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.yalantis.watchface"
         minSdkVersion 18
-        targetSdkVersion 22
+        targetSdkVersion 33
         versionCode 2
         versionName "1.0.1"
     }
@@ -24,16 +24,19 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
 
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     wearApp project(':wear')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:design:22.2.1'
-    compile 'com.google.android.support:wearable:1.1.+'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.google.android.gms:play-services:7.5.0'
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "com.google.android.material:material:1.6.1"
+    compileOnly "com.google.android.wearable:wearable:2.9.0"
+    implementation "com.google.android.support:wearable:2.9.0"
+    implementation "com.google.android.gms:play-services:12.0.1"
 }

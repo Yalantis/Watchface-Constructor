@@ -18,7 +18,8 @@
             android:allowEmbedded="true"
             android:label="@string/eagle_watchface"
             android:permission="android.permission.BIND_WALLPAPER"
-            android:taskAffinity="" >
+            android:taskAffinity=""
+            android:exported="true">
             <meta-data
                 android:name="android.service.wallpaper"
                 android:resource="@xml/watch_face" />
@@ -29,6 +30,13 @@
                 android:name="com.google.android.wearable.watchface.preview_circular"
                 android:resource="@drawable/icon" />
 
+            <meta-data
+                android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
+                android:value="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR" />
+            <meta-data
+                android:name="com.google.android.wearable.watchface.companionBuiltinConfigurationEnabled"
+                android:value="true" />
+
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
 
@@ -36,9 +44,12 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.yalantis.watchface.sevrice.WearableListenerService">
+        <service android:name="com.yalantis.watchface.sevrice.WearableListenerService"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/WearableListener" />
             </intent-filter>
         </service>
 
