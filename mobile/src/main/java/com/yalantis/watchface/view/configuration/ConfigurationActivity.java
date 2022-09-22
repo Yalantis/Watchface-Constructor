@@ -3,20 +3,15 @@ package com.yalantis.watchface.view.configuration;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.yalantis.watchface.Constants;
 import com.yalantis.watchface.R;
+import com.yalantis.watchface.databinding.ActivityConfigurationBinding;
 import com.yalantis.watchface.presenter.configuration.ConfigurationPresenter;
 import com.yalantis.watchface.presenter.configuration.ConfigurationPresenterImpl;
 import com.yalantis.watchface.view.BaseGoogleApiActivity;
 import com.yalantis.watchface.view.ticks_options.TickSetupActivity;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author andrewkhristyan on 10/5/15.
@@ -25,62 +20,56 @@ public class ConfigurationActivity extends BaseGoogleApiActivity implements Conf
 
     protected ConfigurationPresenter mConfigurationPresenter = new ConfigurationPresenterImpl();
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.linear_layout_root)
-    LinearLayout linearLayoutRoot;
+    private ActivityConfigurationBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuration);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        binding = ActivityConfigurationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         setTitle(getString(R.string.main_label));
         mConfigurationPresenter.register(this);
+
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        binding.buttonChangeBackground.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.BACKGROUND_CHOOSER)
+        );
+
+        binding.buttonChangeSecondTick.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.SECOND_CHOOSER)
+        );
+
+        binding.buttonChangeHoursTicks.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.HOUR_CHOOSER)
+        );
+
+        binding.buttonChangeMinuteTicks.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.MINUTE_CHOOSER)
+        );
+
+        binding.buttonChangeSaveConfiguration.setOnClickListener(v -> {
+            mConfigurationPresenter.saveConfig();
+            Snackbar.make(binding.linearLayoutRoot, getString(R.string.saved_message), Snackbar.LENGTH_SHORT)
+                    .show();
+        });
+
+        binding.buttonTicksConfiguration.setOnClickListener(v ->
+                startActivity(TickSetupActivity.newActivity(this))
+        );
+
+        binding.buttonAmbient.setOnClickListener(v ->
+                startActivity(ConfigurationAmbientActivity.newActivity(this))
+        );
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mConfigurationPresenter.unregister(this);
-    }
-
-    @OnClick(R.id.button_change_background)
-    void onClickChangeBackground() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.BACKGROUND_CHOOSER);
-    }
-
-    @OnClick(R.id.button_change_second_tick)
-    void onClickSecondTick() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.SECOND_CHOOSER);
-    }
-
-    @OnClick(R.id.button_change_hours_ticks)
-    void onClickHourTicks() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.HOUR_CHOOSER);
-    }
-
-    @OnClick(R.id.button_change_minute_ticks)
-    void onClickMinuteTicks() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.MINUTE_CHOOSER);
-    }
-
-    @OnClick(R.id.button_change_save_configuration)
-    void onClickSaveConfig() {
-        mConfigurationPresenter.saveConfig();
-        Snackbar.make(linearLayoutRoot, getString(R.string.saved_message), Snackbar.LENGTH_SHORT)
-                .show();
-    }
-
-    @OnClick(R.id.button_ticks_configuration)
-    void onClickTicksConfiguration() {
-        startActivity(TickSetupActivity.newActivity(this));
-    }
-
-    @OnClick(R.id.button_ambient)
-    void onClickAmbient() {
-        startActivity(ConfigurationAmbientActivity.newActivity(this));
     }
 
     @Override
@@ -98,7 +87,7 @@ public class ConfigurationActivity extends BaseGoogleApiActivity implements Conf
 
     @Override
     public void showStatusMessage(String message) {
-        Snackbar.make(findViewById(R.id.linear_layout_root), message, Snackbar.LENGTH_SHORT);
+        Snackbar.make(findViewById(R.id.linear_layout_root), message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

@@ -3,26 +3,21 @@ package com.yalantis.watchface.view.configuration;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.yalantis.watchface.Constants;
 import com.yalantis.watchface.R;
+import com.yalantis.watchface.databinding.ActivityAmbientBinding;
 import com.yalantis.watchface.presenter.configuration.ConfigurationPresenter;
 import com.yalantis.watchface.presenter.configuration.ConfigurationPresenterImpl;
 import com.yalantis.watchface.view.BaseGoogleApiActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author andrewkhristyan on 10/27/15.
  */
-public class ConfigurationAmbientActivity extends BaseGoogleApiActivity implements ConfigurationMvpView{
+public class ConfigurationAmbientActivity extends BaseGoogleApiActivity implements ConfigurationMvpView {
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-
+    private ActivityAmbientBinding binding;
     private ConfigurationPresenter mConfigurationPresenter = new ConfigurationPresenterImpl();
 
     public static Intent newActivity(Context context) {
@@ -33,26 +28,25 @@ public class ConfigurationAmbientActivity extends BaseGoogleApiActivity implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ambient);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        binding = ActivityAmbientBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         setTitle(getString(R.string.main_label));
         mConfigurationPresenter.register(this);
+
+        setupListners();
     }
 
-    @OnClick(R.id.button_change_background)
-    void onClickChangeBackgroundAmbient() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.BACKGROUND_AMBIENT);
-    }
-
-    @OnClick(R.id.button_change_ambient_hour)
-    void onClickChangeHourTick() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.HOUR_AMBIENT);
-    }
-
-    @OnClick(R.id.button_change_ambient_minute)
-    void onClickChangeMinuteTick() {
-        mConfigurationPresenter.changeContentImage(isConnected, Constants.MINUTE_AMBIENT);
+    private void setupListners() {
+        binding.buttonChangeBackground.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.BACKGROUND_AMBIENT)
+        );
+        binding.buttonChangeAmbientHour.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.HOUR_AMBIENT)
+        );
+        binding.buttonChangeAmbientMinute.setOnClickListener(v ->
+                mConfigurationPresenter.changeContentImage(isConnected, Constants.MINUTE_AMBIENT)
+        );
     }
 
     @Override

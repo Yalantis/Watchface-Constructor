@@ -3,17 +3,14 @@ package com.yalantis.watchface.view.ticks_options;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.yalantis.watchface.App;
 import com.yalantis.watchface.R;
+import com.yalantis.watchface.databinding.ActivityTicksConfigBinding;
 import com.yalantis.watchface.presenter.ticks_options.SeekbarPresenterImpl;
 import com.yalantis.watchface.view.BaseGoogleApiActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * @author andrewkhristyan on 10/23/15.
@@ -26,21 +23,7 @@ public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarU
 
 
     private SeekbarPresenterImpl mSeekBarPresenter = new SeekbarPresenterImpl();
-
-    @Bind(R.id.seek_bar_seconds)
-    SeekBar mSeekBarSeconds;
-    @Bind(R.id.text_view_seconds_offset)
-    TextView mTextViewSecondsOffset;
-    @Bind(R.id.seek_bar_minute)
-    SeekBar mSeekBarMinutes;
-    @Bind(R.id.text_view_minute_offset)
-    TextView mTextViewMinutesOffset;
-    @Bind(R.id.seek_bar_hour)
-    SeekBar mSeekBarHours;
-    @Bind(R.id.text_view_hours_offset)
-    TextView mTextViewHoursOffset;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    private ActivityTicksConfigBinding binding;
 
     public static Intent newActivity(Context context) {
         Intent intent = new Intent(context, TickSetupActivity.class);
@@ -50,27 +33,27 @@ public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticks_config);
-        ButterKnife.bind(this);
+        binding = ActivityTicksConfigBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         setTitle(getString(R.string.main_label));
 
-        mTextViewSecondsOffset.setText(String.valueOf(mSeekBarSeconds.getProgress()));
-        mTextViewMinutesOffset.setText(String.valueOf(mSeekBarMinutes.getProgress()));
-        mTextViewHoursOffset.setText(String.valueOf(mSeekBarHours.getProgress()));
+        binding.textViewSecondsOffset.setText(String.valueOf(binding.seekBarSeconds.getProgress()));
+        binding.textViewMinuteOffset.setText(String.valueOf(binding.seekBarMinute.getProgress()));
+        binding.textViewHoursOffset.setText(String.valueOf(binding.seekBarHour.getProgress()));
         mSeekBarPresenter.register(this);
 
-        mSeekBarSeconds.setOnSeekBarChangeListener(new SeekBarListener(SECONDS_KEY));
-        mSeekBarHours.setOnSeekBarChangeListener(new SeekBarListener(HOURS_KEY));
-        mSeekBarMinutes.setOnSeekBarChangeListener(new SeekBarListener(MINUTES_KEY));
+        binding.seekBarSeconds.setOnSeekBarChangeListener(new SeekBarListener(SECONDS_KEY));
+        binding.seekBarHour.setOnSeekBarChangeListener(new SeekBarListener(HOURS_KEY));
+        binding.seekBarMinute.setOnSeekBarChangeListener(new SeekBarListener(MINUTES_KEY));
         bindData();
     }
 
     private void bindData() {
-        mSeekBarSeconds.setProgress(App.getConfigurationManager().getConfigItem(SECONDS_KEY));
-        mSeekBarHours.setProgress(App.getConfigurationManager().getConfigItem(HOURS_KEY));
-        mSeekBarMinutes.setProgress(App.getConfigurationManager().getConfigItem(MINUTES_KEY));
+        binding.seekBarSeconds.setProgress(App.getConfigurationManager().getConfigItem(SECONDS_KEY));
+        binding.seekBarHour.setProgress(App.getConfigurationManager().getConfigItem(HOURS_KEY));
+        binding.seekBarMinute.setProgress(App.getConfigurationManager().getConfigItem(MINUTES_KEY));
     }
 
     @Override
@@ -86,12 +69,12 @@ public class TickSetupActivity extends BaseGoogleApiActivity implements SeekbarU
 
     @Override
     public void updateSeekBarLabel(String seekBarName, int offset) {
-        if(seekBarName.contains("seconds")) {
-            mTextViewSecondsOffset.setText(String.valueOf(offset));
-        } else if(seekBarName.contains("hours")) {
-            mTextViewHoursOffset.setText(String.valueOf(offset));
+        if (seekBarName.contains("seconds")) {
+            binding.textViewSecondsOffset.setText(String.valueOf(offset));
+        } else if (seekBarName.contains("hours")) {
+            binding.textViewHoursOffset.setText(String.valueOf(offset));
         } else {
-            mTextViewMinutesOffset.setText(String.valueOf(offset));
+            binding.textViewMinuteOffset.setText(String.valueOf(offset));
         }
     }
 
